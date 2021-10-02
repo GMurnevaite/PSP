@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PasswordCheckerTest {
 
     PasswordChecker passwordChecker;
+
     @BeforeEach
     void setUp() {
         passwordChecker = new PasswordChecker();

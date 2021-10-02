@@ -7,9 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneValidatorTest {
+
+    PhoneValidator phoneValidator;
+
     @BeforeEach
     void setUp() {
-        PhoneValidator phoneValidator = new PhoneValidator();
+        phoneValidator = new PhoneValidator();
     }
 
     //Test checks for characters other than numbers
@@ -26,12 +29,12 @@ class PhoneValidatorTest {
 
     @Test
     void PhoneValidator_OtherCountryPhoneNumberLengthCorrect(){
-        assertEquals("The phone number length is correct", phoneValidator.prefixRequirement("LT", "+37061234578"));
+        assertEquals("The phone number length is correct", phoneValidator.lengthRequirement("LT", "+37061234578"));
     }
 
     @Test
     void PhoneValidator_OtherCountryPhoneNumberPrefixWrong(){
-        assertEquals("The phone prefix does not match country code", phoneValidator.prefixRequirement("PL", "+37061234578"));
+        assertEquals("The phone prefix does not match country code", phoneValidator.lenghtRequirement("PL", "+37061234578"));
     }
 
     @Test

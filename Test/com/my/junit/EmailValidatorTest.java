@@ -8,9 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmailValidatorTest {
 
+    EmailValidator emailValidator;
+
     @BeforeEach
     void setUp() {
-        EmailValidator emailValidator = new EmailValidator();
+        emailValidator = new EmailValidator();
     }
 
     //Test checks if the email has special symbol
