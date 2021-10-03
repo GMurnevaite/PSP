@@ -1,3 +1,3 @@
 # PSP
 
-Unit testu implementacija atlikta implementation "branch'e".
+Unit testų implementacija atlikta implementation "branch'e".
