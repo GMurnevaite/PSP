@@ -3,7 +3,7 @@ package com.my.junit;
 public class PasswordChecker {
 
     public boolean isPasswordLengthCorrect(String password, int length) {
-        return password.length() <= length;
+        return password.length() >= length;
     }
 
     public boolean checkPasswordUpperCase(String password) {
@@ -30,6 +30,7 @@ public class PasswordChecker {
 
     public boolean isPasswordValid(String password) {
 
-        return !password.isEmpty() && checkPasswordUpperCase(password);
+        if(password != null) return !password.isEmpty() && checkPasswordUpperCase(password);
+        else return false;
     }
 }

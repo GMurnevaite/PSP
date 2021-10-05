@@ -10,7 +10,7 @@ public class PhoneValidator {
     }
 
     private boolean lengthIsRight(String number) {
-        return number.length() == 12;
+        return number.length() == 12 || number.length() == 9;
     }
 
     private boolean noSpaceBars(String number) {
@@ -19,23 +19,22 @@ public class PhoneValidator {
     }
 
     private boolean onlyNumbers(String number) {
-
-        for(int i = 0; i < number.length(); i++)
+        int a = 0;
+        if(number.charAt(0) == '+') a = 1;
+        for(int i = a; i < number.length(); i++)
             return number.charAt(i) >= '0' && number.charAt(i) <= '9';
         return false;
     }
 
     public String replacePhoneNumberPrefix(String number) {
-
         String newPhoneNumber;
-        newPhoneNumber = number.replace("8", "+370");
+        newPhoneNumber = number.replaceFirst("8", "+370");
         return newPhoneNumber;
     }
 
-    public boolean isPhoneNumberValidByState(String number, String prefix, String s1, int i) {
-
-        return true;
+    public boolean isPhoneNumberValidByState(String number, String prefix, String localPrefix, int length) {
+        String allPrefix = prefix + localPrefix;
+        if(number.startsWith(allPrefix)) return number.length() - allPrefix.length() == length - 2;
+        return false;
     }
-
-
 }

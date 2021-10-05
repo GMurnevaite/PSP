@@ -5,34 +5,43 @@ public class EmailValidator {
     public boolean isEmailValid(String email) {
 
         if(null != email) if(!email.isEmpty())
-            return emailDomainValid(email) && isEmailNameInvalid(email);
+            return haveEta(email) && !emailDomainNotValid(email) && !emailNameNotValid(email);
         return false;
     }
-
     private boolean haveEta(String email) {
         return email.contains("@");
     }
 
-    private boolean emailDomainValid(String email) {
-
-        String tld;
+    private boolean emailNameNotValid(String email) {
+        char[] legalSymbols = new char[]{'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^', '_', '`', '{', '|', '}'};
+        char[] symbols = new char[]{'(', ')', '~', '[', ']', '\"', '"', ',', ':', ';', '>', '<', '@'};
         String name;
-        char [] symbols = new char[] {',', '(', ')', '~', '[', ']', '\"', '"',',',':',';', '>', '<', '@','-', '!', '#', '$', '%', '&', '\'', '*', '+', '/', '=', '?', '^', '_', '`', '{', '|', '}'};
+
+        if (haveEta(email)) {
+            name = email.substring(0, email.indexOf('@'));
+            return containsInvalidSymbol(name, symbols) || name.length() > 64 || name.length() == 0 || symbolsInStartAndEnd(name, legalSymbols) || symbolsRepeatsInRow(name, legalSymbols);
+        } else return true;
+    }
+
+    private boolean emailDomainNotValid(String email) {
+        char [] symbols = new char[] {',', '(', ')', '~', '[', ']', '\"', '"',',',':',';', '>', '<', '@', '!', '#', '$', '%', '&', '\'', '*', '+', '/', '=', '?', '^', '_', '`', '{', '|', '}'};
+        String name;
+        String tld;
 
         if (haveEta(email) && email.substring(email.indexOf("@")).contains(".")) {
             tld = email.substring(email.lastIndexOf('.')+1);
             name = email.substring(email.indexOf('@')+1, email.lastIndexOf('.'));
-            return name.length() > 253 || name.length() == 0 || containsInvalidSymbol(name, symbols) || !isStringLowerCase(tld) || containsInvalidSymbol(tld, symbols);
+            return name.length() > 253 || name.length() == 0 || containsInvalidSymbol(name, symbols) || stringNotInLowerCase(tld) || containsInvalidSymbol(tld, symbols);
         }
         else return true;
     }
 
-    private boolean isStringLowerCase(String tld){
-
+    private boolean stringNotInLowerCase(String tld){
         char[] array = tld.toCharArray();
-
-        for (char c : array) if (Character.isLowerCase(c)) return true;
-        return false;
+        for (char c : array)
+            if (Character.isLowerCase(c))
+                return false;
+        return true;
     }
 
 
@@ -60,16 +69,5 @@ public class EmailValidator {
             if (email.indexOf(c) >= 0)
                 return true;
         return false;
-    }
-
-    private boolean isEmailNameInvalid(String email) {
-        String name;
-        char[] legalSymbols = new char[]{'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^', '_', '`', '{', '|', '}'};
-        char[] symbols = new char[]{'(', ')', '~', '[', ']', '\"', '"', ',', ':', ';', '>', '<', '@'};
-
-        if (haveEta(email)) {
-            name = email.substring(0, email.indexOf('@'));
-            return containsInvalidSymbol(email, symbols) || name.length() > 64 || name.length() == 0 || symbolsInStartAndEnd(name, legalSymbols) || symbolsRepeatsInRow(name, legalSymbols);
-        } else return true;
     }
 }

@@ -58,7 +58,7 @@ class EmailValidatorTest {
     }
     @Test
     public void TestPrefixHasUnusedSymbol(){
-        String email = "jonaitis#def@mail.com";
+        String email = "jonaitis~def@mail.com";
         Assertions.assertFalse(emailValidator.isEmailValid(email));
     }
     @Test

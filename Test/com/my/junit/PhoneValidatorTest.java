@@ -68,7 +68,7 @@ public class PhoneValidatorTest {
     @Test
     public void TestIsAnotherStateNumberIsValid(){
         String number = "+38760123456";
-        Assertions.assertTrue(phoneValidator.isPhoneNumberValidByState(number,"+387","60",8));//stringas, prefiksas, sekantys du sk, ilgis po prefikso?
+        Assertions.assertTrue(phoneValidator.isPhoneNumberValidByState(number,"+387","60",8));
     }
 }
 

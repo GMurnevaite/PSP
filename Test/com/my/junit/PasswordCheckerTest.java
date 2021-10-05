@@ -23,7 +23,7 @@ class PasswordCheckerTest {
     public void TestPasswordLengthIsShorterThanRequired(){
         String password = "Mika.45";
         int length = 8;
-        Assertions.assertTrue(passwordChecker.isPasswordLengthCorrect(password,length));
+        Assertions.assertFalse(passwordChecker.isPasswordLengthCorrect(password,length));
     }
 
     @Test
